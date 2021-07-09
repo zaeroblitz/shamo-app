@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:shamo/pages/sign_in_page.dart';
+import 'package:shamo/pages/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,16 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-            child: Text(
-          'Test Google Fonts',
-          style: GoogleFonts.poppins(
-            fontSize: 28,
-            fontWeight: FontWeight.w600,
-          ),
-        )),
-      ),
+      routes: {
+        '/': (context) => SplashPage(),
+        '/signInPage': (context) => SignInPage(),
+      },
     );
   }
 }
