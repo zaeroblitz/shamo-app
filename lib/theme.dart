@@ -16,6 +16,7 @@ Color secondaryTextColor = Color(0xFF999999);
 Color subtitleTextColor = Color(0xFF504F5E);
 Color unselectedNavbarColor = Color(0xFF808191);
 Color transparentColor = Colors.transparent;
+Color blackColor = Color(0xFF2E2E2E);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryTextColor,
@@ -31,6 +32,10 @@ TextStyle subtitleTextStyle = GoogleFonts.poppins(
 
 TextStyle priceTextStyle = GoogleFonts.poppins(
   color: priceColor,
+);
+
+TextStyle blackTextStyle = GoogleFonts.poppins(
+  color: blackColor,
 );
 
 FontWeight light = FontWeight.w300;
