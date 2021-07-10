@@ -43,13 +43,13 @@ class ProductCard extends StatelessWidget {
                   style: secondaryTextStyle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  'Adidas Ultraboost SL 20',
+                  'SL 20 Shoes',
                   style: blackTextStyle.copyWith(
                       fontSize: 18, fontWeight: semiBold),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '\$500',
+                  '\$ 50,00',
                   style:
                       priceTextStyle.copyWith(fontSize: 16, fontWeight: medium),
                 ),

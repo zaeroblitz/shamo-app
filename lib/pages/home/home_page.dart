@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/new_arrival_card.dart';
 import 'package:shamo/widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -187,6 +188,33 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget newArrivalsTitle() {
+    return Container(
+      margin: EdgeInsets.only(top: 30),
+      child: Text(
+        'New Arrivals',
+        style: primaryTextStyle.copyWith(
+          fontSize: 24,
+          fontWeight: semiBold,
+        ),
+      ),
+    );
+  }
+
+  Widget newArrivals() {
+    return Container(
+      margin: EdgeInsets.only(top: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          NewArrialCard(),
+          NewArrialCard(),
+          NewArrialCard(),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -195,6 +223,8 @@ class HomePage extends StatelessWidget {
         categories(),
         popularProductsTitle(),
         popularProducts(),
+        newArrivalsTitle(),
+        newArrivals(),
       ],
     );
   }
