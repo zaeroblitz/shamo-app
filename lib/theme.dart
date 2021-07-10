@@ -14,6 +14,7 @@ Color backgroundColor4 = Color(0xFF252836);
 Color primaryTextColor = Color(0xFFF1F0F2);
 Color secondaryTextColor = Color(0xFF999999);
 Color subtitleTextColor = Color(0xFF504F5E);
+Color unselectedNavbarColor = Color(0xFF808191);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryTextColor,

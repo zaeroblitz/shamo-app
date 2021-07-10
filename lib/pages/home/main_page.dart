@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/pages/home/chat_page.dart';
+import 'package:shamo/pages/home/home_page.dart';
+import 'package:shamo/pages/home/profile_page.dart';
+import 'package:shamo/pages/home/wishlist_page.dart';
 import 'package:shamo/theme.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int currentIndex = 0;
+
   Widget cartButton() {
     return FloatingActionButton(
       onPressed: () {},
@@ -25,39 +36,93 @@ class MainPage extends StatelessWidget {
         child: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/home_icon.png',
-                width: 21,
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 14,
+                ),
+                child: Image.asset(
+                  'assets/home_icon.png',
+                  width: 21,
+                  color:
+                      currentIndex == 0 ? primaryColor : unselectedNavbarColor,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/chat_icon.png',
-                width: 20,
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 14,
+                ),
+                child: Image.asset(
+                  'assets/chat_icon.png',
+                  width: 20,
+                  color:
+                      currentIndex == 1 ? primaryColor : unselectedNavbarColor,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/wishlist_icon.png',
-                width: 20,
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 14,
+                ),
+                child: Image.asset(
+                  'assets/wishlist_icon.png',
+                  width: 20,
+                  color:
+                      currentIndex == 2 ? primaryColor : unselectedNavbarColor,
+                ),
               ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/profile_icon.png',
-                width: 18,
+              icon: Container(
+                margin: EdgeInsets.only(
+                  top: 14,
+                ),
+                child: Image.asset(
+                  'assets/profile_icon.png',
+                  width: 18,
+                  color:
+                      currentIndex == 3 ? primaryColor : unselectedNavbarColor,
+                ),
               ),
               label: '',
             ),
           ],
           backgroundColor: backgroundColor4,
           type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          onTap: (value) {
+            setState(() {
+              print(value);
+              currentIndex = value;
+            });
+          },
         ),
       ),
     );
+  }
+
+  Widget body() {
+    switch (currentIndex) {
+      case 0:
+        return HomePage();
+        break;
+      case 1:
+        return ChatPage();
+        break;
+      case 2:
+        return WishListPage();
+        break;
+      case 3:
+        return ProfilePage();
+        break;
+      default:
+        return HomePage();
+    }
   }
 
   @override
@@ -69,11 +134,7 @@ class MainPage extends StatelessWidget {
       bottomNavigationBar: customButtonNav(),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 30),
-        child: ListView(
-          children: [
-            Text('MainPage'),
-          ],
-        ),
+        child: body(),
       ),
     );
   }
