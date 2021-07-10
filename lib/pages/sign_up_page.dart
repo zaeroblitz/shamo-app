@@ -275,12 +275,12 @@ class SignUpPage extends StatelessWidget {
               "Already have an account?",
               style: subtitleTextStyle.copyWith(fontSize: 12),
             ),
-            TextButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.pushNamed(context, '/signInPage');
               },
               child: Text(
-                'Sign In',
+                ' Sign In',
                 style: subtitleTextStyle.copyWith(
                   fontSize: 12,
                   fontWeight: medium,
@@ -296,24 +296,24 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor1,
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: defaultMargin,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              header(),
-              fullNameInput(),
-              usernameInput(),
-              emailInput(),
-              passwordInput(),
-              signUpButton(),
-              Spacer(),
-              footer(),
-            ],
-          ),
+      body: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            header(),
+            fullNameInput(),
+            usernameInput(),
+            emailInput(),
+            passwordInput(),
+            signUpButton(),
+            Divider(
+              height: 70,
+            ),
+            footer(),
+          ],
         ),
       ),
     );

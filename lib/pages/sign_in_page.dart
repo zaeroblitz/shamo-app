@@ -169,8 +169,8 @@ class SignInPage extends StatelessWidget {
               "Don't have an account?",
               style: subtitleTextStyle.copyWith(fontSize: 12),
             ),
-            TextButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.pushNamed(context, '/signUpPage');
               },
               child: Text(
