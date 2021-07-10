@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shamo/pages/home/chat_page.dart';
 import 'package:shamo/pages/home/home_page.dart';
@@ -13,6 +14,13 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
+  final iconList = [
+    Icons.home_rounded,
+    Icons.chat_rounded,
+    Icons.favorite_rounded,
+    Icons.person_rounded
+  ];
+
   Widget cartButton() {
     return FloatingActionButton(
       onPressed: () {},
@@ -25,85 +33,36 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget customButtonNav() {
-    return ClipRRect(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(36),
-      ),
-      child: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 12,
-        clipBehavior: Clip.antiAlias,
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: EdgeInsets.only(
-                  top: 14,
-                ),
-                child: Image.asset(
-                  'assets/home_icon.png',
-                  width: 21,
-                  color:
-                      currentIndex == 0 ? primaryColor : unselectedNavbarColor,
-                ),
+    return AnimatedBottomNavigationBar.builder(
+        itemCount: iconList.length,
+        tabBuilder: (int index, bool isActive) {
+          final color = isActive ? primaryColor : unselectedNavbarColor;
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconList[index],
+                size: 24,
+                color: color,
               ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: EdgeInsets.only(
-                  top: 14,
-                ),
-                child: Image.asset(
-                  'assets/chat_icon.png',
-                  width: 20,
-                  color:
-                      currentIndex == 1 ? primaryColor : unselectedNavbarColor,
-                ),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: EdgeInsets.only(
-                  top: 14,
-                ),
-                child: Image.asset(
-                  'assets/wishlist_icon.png',
-                  width: 20,
-                  color:
-                      currentIndex == 2 ? primaryColor : unselectedNavbarColor,
-                ),
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: EdgeInsets.only(
-                  top: 14,
-                ),
-                child: Image.asset(
-                  'assets/profile_icon.png',
-                  width: 18,
-                  color:
-                      currentIndex == 3 ? primaryColor : unselectedNavbarColor,
-                ),
-              ),
-              label: '',
-            ),
-          ],
-          backgroundColor: backgroundColor4,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: currentIndex,
-          onTap: (value) {
-            setState(() {
-              print(value);
-              currentIndex = value;
-            });
-          },
-        ),
-      ),
-    );
+            ],
+          );
+        },
+        activeIndex: currentIndex,
+        backgroundColor: backgroundColor2,
+        splashColor: primaryColor,
+        splashRadius: 20.0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.smoothEdge,
+        rightCornerRadius: 32,
+        leftCornerRadius: 32,
+        onTap: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        });
   }
 
   Widget body() {
