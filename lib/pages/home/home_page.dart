@@ -45,12 +45,118 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget categories() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 30,
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: 16),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: primaryColor,
+              ),
+              child: Text(
+                'All Shoes',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 16),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(width: 0.5, color: subtitleTextColor),
+                color: transparentColor,
+              ),
+              child: Text(
+                'Running',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 16),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(width: 0.5, color: subtitleTextColor),
+                color: transparentColor,
+              ),
+              child: Text(
+                'Training',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 16),
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(width: 0.5, color: subtitleTextColor),
+                color: transparentColor,
+              ),
+              child: Text(
+                'Basketball',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(width: 0.5, color: subtitleTextColor),
+                color: transparentColor,
+              ),
+              child: Text(
+                'Hiking',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        header(),
-      ],
+      children: [header(), categories()],
     );
   }
 }
