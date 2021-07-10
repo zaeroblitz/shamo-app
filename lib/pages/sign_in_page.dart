@@ -143,7 +143,9 @@ class SignInPage extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
             child: Text(
               'Sign In',
               style: primaryTextStyle.copyWith(
