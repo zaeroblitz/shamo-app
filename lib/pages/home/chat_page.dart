@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/chat_tile.dart';
 
 class ChatPage extends StatelessWidget {
   Widget header() {
     return Container(
       padding: EdgeInsets.all(24),
-      margin: EdgeInsets.symmetric(horizontal: 30),
+      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
       decoration: BoxDecoration(
         color: backgroundColor1,
         borderRadius: BorderRadius.vertical(
@@ -25,7 +26,7 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  Widget defaultBody() {
+  Widget emptyChat() {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -86,6 +87,23 @@ class ChatPage extends StatelessWidget {
     );
   }
 
+  Widget content() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: defaultMargin,
+      ),
+      child: Column(
+        children: [
+          ChatTile(),
+          SizedBox(
+            height: 30,
+          ),
+          ChatTile(),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -93,7 +111,7 @@ class ChatPage extends StatelessWidget {
         child: Column(
           children: [
             header(),
-            defaultBody(),
+            content(),
           ],
         ),
         // child: body(),
