@@ -5,7 +5,7 @@ import 'package:shamo/widgets/chat_tile.dart';
 class ChatPage extends StatelessWidget {
   Widget header() {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(20),
       margin: EdgeInsets.symmetric(horizontal: defaultMargin),
       decoration: BoxDecoration(
         color: backgroundColor1,
@@ -95,10 +95,6 @@ class ChatPage extends StatelessWidget {
       child: Column(
         children: [
           ChatTile(),
-          SizedBox(
-            height: 30,
-          ),
-          ChatTile(),
         ],
       ),
     );
@@ -108,10 +104,14 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        child: Column(
+        child: ListView(
           children: [
-            header(),
-            content(),
+            Column(
+              children: [
+                header(),
+                content(),
+              ],
+            ),
           ],
         ),
         // child: body(),
