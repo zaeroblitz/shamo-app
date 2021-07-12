@@ -50,37 +50,106 @@ class DetailChatPage extends StatelessWidget {
     );
   }
 
-  Widget chatInput() {
+  Widget productPreview() {
     return Container(
-      height: 45,
-      margin: EdgeInsets.all(24),
+      width: 250,
+      height: 74,
+      margin: EdgeInsets.only(
+        bottom: 20,
+      ),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: backgroundColor5,
+        border: Border.all(
+          color: primaryColor,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: backgroundColor4,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: TextFormField(
-                  decoration: InputDecoration.collapsed(
-                    hintText: 'Type message...',
-                    hintStyle: subtitleTextStyle,
-                  ),
-                  style: primaryTextStyle,
-                ),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              'assets/image_shoes.png',
+              width: 54,
             ),
           ),
           SizedBox(
-            width: 20,
+            width: 10,
           ),
-          Image.asset(
-            'assets/send_button.png',
-            width: 45,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Adidas SL 20 Shoes',
+                  style: primaryTextStyle,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  '\$ 50,00',
+                  style: priceTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Image.asset(
+              'assets/close_icon.png',
+              width: 22,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget chatInput() {
+    return Container(
+      margin: EdgeInsets.all(24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          productPreview(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 48,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: backgroundColor4,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: TextFormField(
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Type message...',
+                        hintStyle: subtitleTextStyle,
+                      ),
+                      style: primaryTextStyle,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Image.asset(
+                'assets/send_button.png',
+                width: 48,
+              ),
+            ],
           ),
         ],
       ),
