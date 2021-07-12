@@ -28,61 +28,63 @@ class ChatPage extends StatelessWidget {
 
   Widget emptyChat() {
     return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/headset_icon.png',
-            width: 80,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Opss no message yet?',
-            style: primaryTextStyle.copyWith(
-              fontSize: 16,
-              fontWeight: medium,
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/headset_icon.png',
+              width: 80,
             ),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Text(
-            'You have never done a transaction',
-            style: secondaryTextStyle,
-          ),
-          Container(
-            margin: EdgeInsetsDirectional.only(
-              top: 20,
+            SizedBox(
+              height: 20,
             ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadiusDirectional.circular(24),
+            Text(
+              'Opss no message yet?',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
             ),
-            child: TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  )),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 24,
-                ),
-                child: Text(
-                  'Explore State',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: medium,
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              'You have never done a transaction',
+              style: secondaryTextStyle,
+            ),
+            Container(
+              margin: EdgeInsetsDirectional.only(
+                top: 20,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadiusDirectional.circular(24),
+              ),
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    )),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 24,
+                  ),
+                  child: Text(
+                    'Explore Store',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: medium,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -104,14 +106,10 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        child: ListView(
+        child: Column(
           children: [
-            Column(
-              children: [
-                header(),
-                content(),
-              ],
-            ),
+            header(),
+            content(),
           ],
         ),
         // child: body(),
