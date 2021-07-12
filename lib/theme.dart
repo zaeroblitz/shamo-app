@@ -35,8 +35,24 @@ TextStyle priceTextStyle = GoogleFonts.poppins(
   color: priceColor,
 );
 
+TextStyle priceTextStyle2 = GoogleFonts.poppins(
+  color: backgroundColor5,
+);
+
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: blackColor,
+);
+
+TextStyle blackTextStyle2 = GoogleFonts.poppins(
+  color: backgroundColor5,
+);
+
+TextStyle purpleColor = GoogleFonts.poppins(
+  color: primaryColor,
+);
+
+TextStyle secondaryButtonStyle = GoogleFonts.poppins(
+  color: secondaryColor,
 );
 
 FontWeight light = FontWeight.w300;

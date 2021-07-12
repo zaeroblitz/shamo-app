@@ -122,7 +122,8 @@ class DetailChatPage extends StatelessWidget {
         children: [
           ChatBuble(
             isSender: true,
-            message: 'Hi is this item ready?',
+            message: 'Hi, This item is still available?',
+            hasProduct: true,
           ),
           ChatBuble(
             isSender: false,
@@ -131,7 +132,7 @@ class DetailChatPage extends StatelessWidget {
           ),
           ChatBuble(
             isSender: true,
-            message: "That's suit me well",
+            message: "It's suit me well",
           ),
         ],
       ),
