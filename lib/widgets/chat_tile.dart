@@ -33,7 +33,7 @@ class ChatTile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 180,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
                     'Good night, This item is on...',
                     style: subtitleTextStyle.copyWith(

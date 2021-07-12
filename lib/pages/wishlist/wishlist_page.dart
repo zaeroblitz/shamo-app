@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/wishlist_card.dart';
 
 class WishListPage extends StatelessWidget {
   Widget header() {
@@ -14,7 +15,7 @@ class WishListPage extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          'Wishlist Items',
+          'Favorite Shoes',
           style: primaryTextStyle.copyWith(
             fontSize: 18,
             fontWeight: medium,
@@ -90,10 +91,15 @@ class WishListPage extends StatelessWidget {
       margin: EdgeInsets.only(
         top: defaultMargin,
       ),
-      child: Column(
-        children: [
-          // ChatTile(),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            WishlistCard(),
+            WishlistCard(),
+            WishlistCard(),
+          ],
+        ),
       ),
     );
   }
@@ -105,10 +111,9 @@ class WishListPage extends StatelessWidget {
         child: Column(
           children: [
             header(),
-            emptyWishlist(),
+            content(),
           ],
         ),
-        // child: body(),
       ),
     );
   }
