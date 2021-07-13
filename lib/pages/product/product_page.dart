@@ -205,6 +205,8 @@ class _ProductPageState extends State<ProductPage> {
     }
 
     Widget contentProductSimilarShoes() {
+      int index = -1;
+
       return Container(
         margin: EdgeInsets.only(bottom: 30),
         child: Column(
@@ -217,24 +219,23 @@ class _ProductPageState extends State<ProductPage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: productImages
-                    .map(
-                      (productImage) => Container(
-                        width: 54,
-                        height: 54,
-                        margin: EdgeInsets.only(
-                          right: 16,
-                          top: 12,
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                              image: AssetImage(productImage),
-                              fit: BoxFit.cover,
-                            )),
-                      ),
-                    )
-                    .toList(),
+                children: productImages.map((productImage) {
+                  index++;
+                  return Container(
+                    width: 54,
+                    height: 54,
+                    margin: EdgeInsets.only(
+                      left: index == 0 ? 0 : 16,
+                      top: 12,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: AssetImage(productImage),
+                          fit: BoxFit.cover,
+                        )),
+                  );
+                }).toList(),
               ),
             ),
           ],
