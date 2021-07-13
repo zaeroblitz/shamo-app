@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:shamo/pages/chat/chat_page.dart';
 import 'package:shamo/pages/home/home_page.dart';
-import 'package:shamo/pages/home/profile_page.dart';
+import 'package:shamo/pages/profile/profile_page.dart';
 import 'package:shamo/pages/wishlist/wishlist_page.dart';
 import 'package:shamo/theme.dart';
 
