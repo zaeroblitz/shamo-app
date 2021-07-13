@@ -31,10 +31,10 @@ class ProfilePage extends StatelessWidget {
                   Text(
                     'Hello, Zaero',
                     style: primaryTextStyle.copyWith(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: semiBold,
                     ),
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
@@ -49,9 +49,30 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              child: Image.asset(
-                'assets/exit_button.png',
-                width: 20,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: backgroundColor3,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Logout',
+                      style: primaryTextStyle.copyWith(
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Image.asset(
+                      'assets/exit_button.png',
+                      width: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -79,7 +100,9 @@ class ProfilePage extends StatelessWidget {
               height: 16,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/editProfile');
+              },
               child: Container(
                 margin: EdgeInsets.only(
                   bottom: 20,
