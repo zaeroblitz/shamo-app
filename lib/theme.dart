@@ -19,6 +19,7 @@ Color subtitleTextColor = Color(0xFF504F5E);
 Color unselectedNavbarColor = Color(0xFF808191);
 Color transparentColor = Colors.transparent;
 Color blackColor = Color(0xFF2E2E2E);
+Color greyColor = Color(0xFFC4C4C4);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryTextColor,
