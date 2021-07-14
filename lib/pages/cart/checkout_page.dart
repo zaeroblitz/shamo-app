@@ -51,7 +51,7 @@ class CheckoutPage extends StatelessWidget {
                       Text(
                         'Checkout Details',
                         style: primaryTextStyle.copyWith(
-                          fontSize: 14,
+                          fontSize: 18,
                           fontWeight: medium,
                         ),
                       ),
@@ -320,10 +320,43 @@ class CheckoutPage extends StatelessWidget {
       );
     }
 
+    Widget checkoutNowButton() {
+      return Container(
+        margin: EdgeInsets.only(
+          left: defaultMargin,
+          right: defaultMargin,
+          bottom: defaultMargin,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/checkoutSuccess');
+          },
+          style: TextButton.styleFrom(
+            backgroundColor: primaryColor,
+            padding: EdgeInsets.all(14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: Text(
+            'Checkout Now',
+            style: primaryTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: appBar(),
       body: content(),
+      bottomNavigationBar: checkoutNowButton(),
     );
   }
 }
