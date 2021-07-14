@@ -189,6 +189,113 @@ class CheckoutPage extends StatelessWidget {
       );
     }
 
+    Widget productSummary() {
+      return Container(
+        margin: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: backgroundColor4,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Product Summary',
+              style:
+                  primaryTextStyle.copyWith(fontSize: 18, fontWeight: semiBold),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Product Quantity',
+                    style: secondaryTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    '2 items',
+                    style: primaryTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Product Price',
+                    style: secondaryTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    '\$ 100,00',
+                    style: primaryTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Shipping Price',
+                    style: secondaryTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    '\$ 10',
+                    style: primaryTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: Color(0xFF2E3141),
+              height: 1,
+              thickness: 1,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total Price',
+                  style: priceTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
+                ),
+                Text(
+                  '\$ 110,00',
+                  style: priceTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget content() {
       return Container(
         margin: EdgeInsets.all(defaultMargin),
@@ -206,8 +313,8 @@ class CheckoutPage extends StatelessWidget {
             ),
             CheckoutItem(),
             CheckoutItem(),
-            CheckoutItem(),
             addressDetails(),
+            productSummary(),
           ],
         ),
       );
