@@ -144,7 +144,7 @@ class CartPage extends StatelessWidget {
                   style: primaryTextStyle,
                 ),
                 Text(
-                  '\$ 500,00',
+                  '\$ 150,00',
                   style: priceTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: semiBold,
@@ -156,7 +156,9 @@ class CartPage extends StatelessWidget {
               height: 20,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/checkout');
+              },
               style: TextButton.styleFrom(
                   backgroundColor: primaryColor,
                   padding: EdgeInsets.symmetric(
