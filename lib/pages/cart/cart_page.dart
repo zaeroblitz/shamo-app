@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/cart_item.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -124,10 +125,88 @@ class CartPage extends StatelessWidget {
       );
     }
 
+    Widget subtotalAndButton() {
+      return Container(
+        margin: EdgeInsets.only(
+          left: defaultMargin,
+          right: defaultMargin,
+          bottom: defaultMargin,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Subtotal',
+                  style: primaryTextStyle,
+                ),
+                Text(
+                  '\$ 500,00',
+                  style: priceTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 20,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Continue to Checkout',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: primaryTextColor,
+                    size: 24,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget content() {
+      return Container(
+        margin: EdgeInsets.all(defaultMargin),
+        child: ListView(
+          children: [
+            CartItem(),
+            CartItem(),
+            CartItem(),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: appBar(),
-      body: emptyCart(),
+      body: content(),
+      bottomNavigationBar: subtotalAndButton(),
     );
   }
 }
