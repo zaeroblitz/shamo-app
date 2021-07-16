@@ -49,6 +49,9 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/signInPage');
+              },
               child: Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(

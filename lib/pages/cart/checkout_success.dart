@@ -76,7 +76,8 @@ class CheckoutSuccess extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/home', (route) => false);
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(
@@ -101,7 +102,8 @@ class CheckoutSuccess extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '');
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '', (route) => false);
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(

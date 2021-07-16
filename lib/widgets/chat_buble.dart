@@ -55,7 +55,7 @@ class ChatBuble extends StatelessWidget {
                       Text(
                         '\$ 50,00',
                         style: isSender
-                            ? priceTextStyle2.copyWith(
+                            ? primaryTextStyle.copyWith(
                                 fontWeight: bold,
                                 fontSize: 16,
                               )
