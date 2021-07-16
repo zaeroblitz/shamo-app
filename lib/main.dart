@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shamo/pages/cart/cart_page.dart';
 import 'package:shamo/pages/cart/checkout_page.dart';
 import 'package:shamo/pages/cart/checkout_success.dart';
@@ -9,6 +10,7 @@ import 'package:shamo/pages/profile/edit_profile.dart';
 import 'package:shamo/pages/sign_in_page.dart';
 import 'package:shamo/pages/sign_up_page.dart';
 import 'package:shamo/pages/splash_screen.dart';
+import 'package:shamo/provider/auth_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,20 +19,27 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => SplashPage(),
-        '/signInPage': (context) => SignInPage(),
-        '/signUpPage': (context) => SignUpPage(),
-        '/home': (context) => MainPage(),
-        '/detailChat': (context) => DetailChatPage(),
-        '/editProfile': (context) => EditProfilePage(),
-        '/product': (context) => ProductPage(),
-        '/cart': (context) => CartPage(),
-        '/checkout': (context) => CheckoutPage(),
-        '/checkoutSuccess': (context) => CheckoutSuccess(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => SplashPage(),
+          '/signInPage': (context) => SignInPage(),
+          '/signUpPage': (context) => SignUpPage(),
+          '/home': (context) => MainPage(),
+          '/detailChat': (context) => DetailChatPage(),
+          '/editProfile': (context) => EditProfilePage(),
+          '/product': (context) => ProductPage(),
+          '/cart': (context) => CartPage(),
+          '/checkout': (context) => CheckoutPage(),
+          '/checkoutSuccess': (context) => CheckoutSuccess(),
+        },
+      ),
     );
   }
 }

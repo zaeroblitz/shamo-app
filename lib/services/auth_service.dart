@@ -20,7 +20,13 @@ class AuthService {
       'password': password,
     });
 
-    var response = await http.post(url, headers: headers, body: body);
+    var response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    print(response.body);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
