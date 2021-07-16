@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/theme.dart';
-import 'package:shamo/widgets/loading_button.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shamo/widgets/loading_spinkit_button.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -300,30 +298,27 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     Widget signUpButton() {
-      return isLoading
-          ? LoadingButtonSpinkit()
-          : Container(
-              margin: EdgeInsets.only(top: 30),
-              height: 50,
-              width: double.infinity,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: TextButton(
-                onPressed: handleSignUp,
-                child: Text(
-                  'Sign Up',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: medium,
-                  ),
-                ),
-                style: TextButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    )),
-              ),
-            );
+      return Container(
+        margin: EdgeInsets.only(top: 30),
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+        child: TextButton(
+          onPressed: handleSignUp,
+          child: Text(
+            'Sign Up',
+            style: primaryTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: medium,
+            ),
+          ),
+          style: TextButton.styleFrom(
+              backgroundColor: primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              )),
+        ),
+      );
     }
 
     Widget footer() {
@@ -369,7 +364,7 @@ class _SignUpPageState extends State<SignUpPage> {
             usernameInput(),
             emailInput(),
             passwordInput(),
-            signUpButton(),
+            isLoading ? LoadingButtonSpinkit() : signUpButton(),
             Divider(
               height: 70,
             ),

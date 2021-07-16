@@ -1,9 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/loading_spinkit_button.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final TextEditingController emailController = TextEditingController(text: '');
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/home');
+      } else {
+        if (emailController.text == '' && passwordController.text == '') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: alertColor,
+              content: Text(
+                'Please enter a correct email & password.',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+
+          setState(() {
+            isLoading = false;
+          });
+        } else if (emailController.text == '') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: alertColor,
+              content: Text(
+                'Please enter a correct email',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+
+          setState(() {
+            isLoading = false;
+          });
+        } else if (passwordController.text == '') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: alertColor,
+              content: Text(
+                'Please enter a correct password',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+
+          setState(() {
+            isLoading = false;
+          });
+        }
+      }
+    }
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -66,6 +139,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
+                        controller: emailController,
                         style: primaryTextStyle,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Email Address',
@@ -119,6 +193,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: TextFormField(
+                        controller: passwordController,
                         style: primaryTextStyle,
                         obscureText: true,
                         decoration: InputDecoration.collapsed(
@@ -143,9 +218,7 @@ class SignInPage extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
+            onPressed: handleSignIn,
             child: Text(
               'Sign In',
               style: primaryTextStyle.copyWith(
@@ -203,7 +276,7 @@ class SignInPage extends StatelessWidget {
               header(),
               emailInput(),
               passwordInput(),
-              signInButton(),
+              isLoading ? LoadingButtonSpinkit() : signInButton(),
               Spacer(),
               footer(),
             ],
