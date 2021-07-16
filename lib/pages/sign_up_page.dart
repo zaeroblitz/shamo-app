@@ -2,20 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/loading_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shamo/widgets/loading_spinkit_button.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController nameController = TextEditingController(text: '');
+
   final TextEditingController usernameController =
       TextEditingController(text: '');
+
   final TextEditingController emailController = TextEditingController(text: '');
+
   final TextEditingController passwordController =
       TextEditingController(text: '');
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     handleSignUp() async {
+      setState(() {
+        isLoading = true;
+      });
+
       if (await authProvider.register(
         name: nameController.text,
         username: usernameController.text,
@@ -23,7 +40,21 @@ class SignUpPage extends StatelessWidget {
         password: passwordController.text,
       )) {
         Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Register Failed',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
       }
+
+      setState(() {
+        isLoading = false;
+      });
     }
 
     Widget header() {
@@ -269,26 +300,30 @@ class SignUpPage extends StatelessWidget {
     }
 
     Widget signUpButton() {
-      return Container(
-          margin: EdgeInsets.only(top: 30),
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-          child: TextButton(
-            onPressed: handleSignUp,
-            child: Text(
-              'Sign Up',
-              style: primaryTextStyle.copyWith(
-                fontSize: 16,
-                fontWeight: medium,
+      return isLoading
+          ? LoadingButtonSpinkit()
+          : Container(
+              margin: EdgeInsets.only(top: 30),
+              height: 50,
+              width: double.infinity,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
+              child: TextButton(
+                onPressed: handleSignUp,
+                child: Text(
+                  'Sign Up',
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: medium,
+                  ),
+                ),
+                style: TextButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    )),
               ),
-            ),
-            style: TextButton.styleFrom(
-                backgroundColor: primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                )),
-          ));
+            );
     }
 
     Widget footer() {
