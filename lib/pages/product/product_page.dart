@@ -1,26 +1,27 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/ProductModel.dart';
+import 'package:shamo/provider/product_provider.dart';
+import 'package:shamo/provider/wishlist_provider.dart';
 import 'package:shamo/theme.dart';
 
 class ProductPage extends StatefulWidget {
+  final ProductModel product;
+  ProductPage({this.product});
+
   @override
   _ProductPageState createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  List productImages = [
-    'assets/image_shoes.png',
-    'assets/image_shoes_2.png',
-    'assets/image_shoes_3.png',
-    'assets/image_shoes.png',
-    'assets/image_shoes_2.png',
-    'assets/image_shoes_3.png',
-  ];
-
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+
     Widget indicator(index) {
       return Container(
         margin: EdgeInsets.symmetric(
@@ -68,11 +69,13 @@ class _ProductPageState extends State<ProductPage> {
                 ),
               ],
             ),
+
+            // NOTE: Product Gallery
             CarouselSlider(
-              items: productImages
+              items: widget.product.galleries
                   .map(
-                    (productImage) => Image.asset(
-                      productImage,
+                    (gallery) => Image.network(
+                      gallery.url,
                       width: double.infinity,
                       height: 310,
                       fit: BoxFit.cover,
@@ -95,7 +98,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: productImages.map((e) {
+              children: widget.product.galleries.map((gallery) {
                 index++;
                 return indicator(index);
               }).toList(),
@@ -117,7 +120,7 @@ class _ProductPageState extends State<ProductPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.65,
                     child: Text(
-                      'Adidas Ultraboost SL 20 Shoes',
+                      '${widget.product.name}',
                       style: primaryTextStyle.copyWith(
                         fontSize: 18,
                         fontWeight: semiBold,
@@ -136,8 +139,39 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
             GestureDetector(
+              onTap: () {
+                setState(() {
+                  wishlistProvider.setProduct(widget.product);
+
+                  if (wishlistProvider.isWishlist(widget.product)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: secondaryColor,
+                        duration: Duration(milliseconds: 750),
+                        content: Text(
+                          'Has been add to the wishlist',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: alertColor,
+                        duration: Duration(milliseconds: 750),
+                        content: Text(
+                          'Has been removed from the wishlist',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  }
+                });
+              },
               child: Image.asset(
-                'assets/wishlist_icon_black.png',
+                wishlistProvider.isWishlist(widget.product)
+                    ? 'assets/wishlist_button_blue.png'
+                    : 'assets/wishlist_icon_black.png',
                 width: 46,
                 height: 46,
                 fit: BoxFit.cover,
@@ -167,7 +201,7 @@ class _ProductPageState extends State<ProductPage> {
               style: primaryTextStyle,
             ),
             Text(
-              '\$ 50,00',
+              '\$ ${widget.product.price}',
               style: priceTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: semiBold,
@@ -193,11 +227,10 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
             Text(
-              'Unpaved trails and mixed surfaces are easy when you have the traction and support you need. Casual enough for the daily commute.',
+              '${widget.product.description}',
               style: subtitleTextStyle.copyWith(
                 fontWeight: light,
               ),
-              textAlign: TextAlign.justify,
             )
           ],
         ),
@@ -219,7 +252,7 @@ class _ProductPageState extends State<ProductPage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: productImages.map((productImage) {
+                children: productProvider.products.map((product) {
                   index++;
                   return Container(
                     width: 54,
@@ -231,7 +264,7 @@ class _ProductPageState extends State<ProductPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: AssetImage(productImage),
+                          image: NetworkImage(product.galleries[0].url),
                           fit: BoxFit.cover,
                         )),
                   );
