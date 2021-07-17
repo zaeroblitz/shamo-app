@@ -349,15 +349,21 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+
+    print(isKeyboard);
+
     return Scaffold(
       backgroundColor: backgroundColor1,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: isKeyboard ? true : false,
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: defaultMargin,
         ),
         child: ListView(
           scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          reverse: true,
           children: [
             header(),
             fullNameInput(),
@@ -369,7 +375,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 70,
             ),
             footer(),
-          ],
+          ].reversed.toList(),
         ),
       ),
     );

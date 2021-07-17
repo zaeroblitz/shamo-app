@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/UserModel.dart';
+import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
 class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     Widget appBar() {
       return PreferredSize(
         child: SafeArea(
@@ -98,7 +104,7 @@ class EditProfilePage extends StatelessWidget {
                   hintText: 'Your Name',
                   hintStyle: primaryTextStyle.copyWith(fontSize: 16),
                 ),
-                initialValue: 'Zaero Blitz',
+                initialValue: '${user.name}',
                 style: primaryTextStyle.copyWith(fontSize: 16),
               ),
             ),
@@ -134,7 +140,7 @@ class EditProfilePage extends StatelessWidget {
                   hintText: 'Your Name',
                   hintStyle: primaryTextStyle.copyWith(fontSize: 16),
                 ),
-                initialValue: 'zaero',
+                initialValue: '${user.username}',
                 style: primaryTextStyle.copyWith(fontSize: 16),
               ),
             ),
@@ -170,7 +176,7 @@ class EditProfilePage extends StatelessWidget {
                   hintText: 'Your Email Address',
                   hintStyle: primaryTextStyle.copyWith(fontSize: 16),
                 ),
-                initialValue: 'zaeroblitz@gmail.com',
+                initialValue: '${user.email}',
                 style: primaryTextStyle.copyWith(fontSize: 16),
               ),
             ),
@@ -187,9 +193,10 @@ class EditProfilePage extends StatelessWidget {
           children: [
             Center(
               child: ClipOval(
-                child: Image.asset(
-                  'assets/image_profile.png',
+                child: Image.network(
+                  '${user.profilePhotoUrl}',
                   width: 100,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
