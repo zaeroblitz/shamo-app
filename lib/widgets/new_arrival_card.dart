@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/theme.dart';
 
 class NewArrialCard extends StatelessWidget {
+  final ProductModel product;
+
+  NewArrialCard({this.product});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -14,6 +19,7 @@ class NewArrialCard extends StatelessWidget {
         ),
         child: Row(
           children: [
+            // NOTE: Product Image
             Container(
               width: 120,
               height: 120,
@@ -21,7 +27,7 @@ class NewArrialCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/image_shoes.png'),
+                  image: NetworkImage(product.galleries[0].url),
                 ),
               ),
             ),
@@ -31,14 +37,17 @@ class NewArrialCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // NOTE: Product Category
                 Text(
-                  'Running',
+                  '${product.category.name}',
                   style: subtitleTextStyle.copyWith(fontSize: 12),
                 ),
+
+                // NOTE: Product Name
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 72 - 120,
                   child: Text(
-                    'SL 20 Shoes',
+                    '${product.name}',
                     overflow: TextOverflow.ellipsis,
                     style: primaryTextStyle.copyWith(
                       fontSize: 16,
@@ -47,7 +56,7 @@ class NewArrialCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$ 50,00',
+                  '\$ ${product.price}',
                   style: priceTextStyle.copyWith(
                     fontSize: 14,
                     fontWeight: medium,

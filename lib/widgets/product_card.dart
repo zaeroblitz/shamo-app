@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/theme.dart';
 
 class ProductCard extends StatelessWidget {
+  final ProductModel product;
+
+  ProductCard({this.product});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,6 +29,8 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
+
+            // NOTE: Product Image
             Container(
               height: 150,
               width: 245,
@@ -31,7 +38,7 @@ class ProductCard extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/image_shoes.png'),
+                  image: NetworkImage(product.galleries[0].url),
                 ),
               ),
             ),
@@ -39,25 +46,33 @@ class ProductCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Running',
-                    style: secondaryTextStyle.copyWith(fontSize: 12),
-                  ),
-                  Text(
-                    'SL 20 Shoes',
-                    style: blackTextStyle.copyWith(
-                        fontSize: 18, fontWeight: semiBold),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '\$ 50,00',
-                    style: priceTextStyle.copyWith(
-                        fontSize: 16, fontWeight: medium),
-                  ),
-                ],
+              child: Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // NOTE: Product Category
+                    Text(
+                      '${product.category.name}',
+                      style: secondaryTextStyle.copyWith(fontSize: 12),
+                    ),
+
+                    // NOTE: Product Name
+                    Text(
+                      '${product.name}',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 18, fontWeight: semiBold),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+
+                    // NOTE: Product Price
+                    Text(
+                      '\$ ${product.price}',
+                      style: priceTextStyle.copyWith(
+                          fontSize: 16, fontWeight: medium),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
