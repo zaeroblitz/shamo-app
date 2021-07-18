@@ -5,9 +5,9 @@ import 'package:shamo/models/ProductModel.dart';
 class CartProvider with ChangeNotifier {
   List<CartModel> _carts = [];
 
-  List<CartModel> get cart => _carts;
+  List<CartModel> get carts => _carts;
 
-  set cart(List<CartModel> carts) {
+  set carts(List<CartModel> carts) {
     _carts = carts;
     notifyListeners();
   }
@@ -40,6 +40,7 @@ class CartProvider with ChangeNotifier {
 
     if (_carts[id].quantity == 0) {
       _carts.removeAt(id);
+      print(_carts.map((e) => e.id));
     }
 
     notifyListeners();
@@ -47,6 +48,7 @@ class CartProvider with ChangeNotifier {
 
   removeCart(int id) {
     _carts.removeAt(id);
+    print(_carts.map((e) => e.id));
     notifyListeners();
   }
 

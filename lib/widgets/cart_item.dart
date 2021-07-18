@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/CartModel.dart';
+import 'package:shamo/provider/cart_provider.dart';
 import 'package:shamo/theme.dart';
 
-class CartItem extends StatefulWidget {
-  @override
-  _CartItemState createState() => _CartItemState();
-}
+class CartItem extends StatelessWidget {
+  final CartModel cart;
+  CartItem(this.cart);
 
-class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       padding: EdgeInsets.symmetric(
@@ -27,8 +30,8 @@ class _CartItemState extends State<CartItem> {
               // NOTE: Product Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  'assets/image_shoes.png',
+                child: Image.network(
+                  cart.product.galleries[0].url,
                   width: 60,
                   height: 60,
                   fit: BoxFit.cover,
@@ -44,7 +47,7 @@ class _CartItemState extends State<CartItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Adidas SL 20 Shoes',
+                      '${cart.product.name}',
                       style: primaryTextStyle.copyWith(
                         fontWeight: semiBold,
                       ),
@@ -54,7 +57,7 @@ class _CartItemState extends State<CartItem> {
                     SizedBox(
                       height: 2,
                     ),
-                    Text('\$ 50,00', style: priceTextStyle),
+                    Text('\$ ${cart.product.price}', style: priceTextStyle),
                   ],
                 ),
               ),
@@ -65,11 +68,13 @@ class _CartItemState extends State<CartItem> {
                 children: [
                   GestureDetector(
                     child: Image.asset('assets/add_icon.png', width: 12),
-                    onTap: () {},
+                    onTap: () {
+                      cartProvider.addQuantity(cart.id);
+                    },
                   ),
                   Container(
                     child: Text(
-                      '2',
+                      cart.quantity.toString(),
                       style: primaryTextStyle.copyWith(fontWeight: medium),
                     ),
                     margin: EdgeInsets.symmetric(vertical: 2),
@@ -79,7 +84,9 @@ class _CartItemState extends State<CartItem> {
                       'assets/reduce_icon.png',
                       width: 12,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      cartProvider.reduceQuantity(cart.id);
+                    },
                   ),
                 ],
               ),
@@ -107,6 +114,9 @@ class _CartItemState extends State<CartItem> {
                 ),
               ],
             ),
+            onTap: () {
+              cartProvider.removeCart(cart.id);
+            },
           ),
         ],
       ),
