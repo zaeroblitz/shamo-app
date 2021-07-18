@@ -31,50 +31,20 @@ class _SignInPageState extends State<SignInPage> {
       )) {
         Navigator.pushNamed(context, '/home');
       } else {
-        if (emailController.text == '' && passwordController.text == '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: alertColor,
-              content: Text(
-                'Please enter a correct email & password.',
-                textAlign: TextAlign.center,
-              ),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Login Failed',
+              textAlign: TextAlign.center,
             ),
-          );
-
-          setState(() {
-            isLoading = false;
-          });
-        } else if (emailController.text == '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: alertColor,
-              content: Text(
-                'Please enter a correct email',
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
-
-          setState(() {
-            isLoading = false;
-          });
-        } else if (passwordController.text == '') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: alertColor,
-              content: Text(
-                'Please enter a correct password',
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
-
-          setState(() {
-            isLoading = false;
-          });
-        }
+          ),
+        );
       }
+
+      setState(() {
+        isLoading = false;
+      });
     }
 
     Widget header() {

@@ -254,19 +254,31 @@ class _ProductPageState extends State<ProductPage> {
               child: Row(
                 children: productProvider.products.map((product) {
                   index++;
-                  return Container(
-                    width: 54,
-                    height: 54,
-                    margin: EdgeInsets.only(
-                      left: index == 0 ? 0 : 16,
-                      top: 12,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductPage(
+                            product: product,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 54,
+                      height: 54,
+                      margin: EdgeInsets.only(
+                        left: index == 0 ? 0 : 16,
+                        top: 12,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: NetworkImage(product.galleries[0].url),
+                            fit: BoxFit.cover,
+                          )),
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: NetworkImage(product.galleries[0].url),
-                          fit: BoxFit.cover,
-                        )),
                   );
                 }).toList(),
               ),

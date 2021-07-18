@@ -52,33 +52,31 @@ class ProductCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // NOTE: Product Category
-                    Text(
-                      '${product.category.name}',
-                      style: secondaryTextStyle.copyWith(fontSize: 12),
-                    ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // NOTE: Product Category
+                  Text(
+                    '${product.category.name}',
+                    style: secondaryTextStyle.copyWith(fontSize: 12),
+                  ),
 
-                    // NOTE: Product Name
-                    Text(
-                      '${product.name}',
-                      style: blackTextStyle.copyWith(
-                          fontSize: 18, fontWeight: semiBold),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
+                  // NOTE: Product Name
+                  Text(
+                    '${product.name}',
+                    style: blackTextStyle.copyWith(
+                        fontSize: 18, fontWeight: semiBold),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
 
-                    // NOTE: Product Price
-                    Text(
-                      '\$ ${product.price}',
-                      style: priceTextStyle.copyWith(
-                          fontSize: 16, fontWeight: medium),
-                    ),
-                  ],
-                ),
+                  // NOTE: Product Price
+                  Text(
+                    '\$ ${product.price}',
+                    style: priceTextStyle.copyWith(
+                        fontSize: 16, fontWeight: medium),
+                  ),
+                ],
               ),
             ),
           ],
