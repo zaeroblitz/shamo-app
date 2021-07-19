@@ -25,7 +25,9 @@ dependencies:
     sdk: flutter
   animated_bottom_navigation_bar: ^0.3.2
   carousel_slider: ^4.0.0
+  cloud_firestore: ^0.16.0+1
   cupertino_icons: ^1.0.2
+  firebase_core: ^0.7.0
   flutter_dash: ^0.0.1
   flutter_spinkit: ^4.1.2+1
   google_fonts: ^1.1.2
