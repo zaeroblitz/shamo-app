@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/provider/cart_provider.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/checkout_item.dart';
 
 class CheckoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     Widget appBar() {
       return PreferredSize(
         child: SafeArea(
@@ -220,7 +224,8 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '2 items',
+                    '${cartProvider.totalItems()} ' +
+                        (cartProvider.totalItems() > 1 ? 'items' : 'item'),
                     style: primaryTextStyle.copyWith(
                       fontWeight: medium,
                     ),
@@ -240,7 +245,7 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$ 100,00',
+                    '\$ ${cartProvider.totalPrice()}',
                     style: primaryTextStyle.copyWith(
                       fontWeight: medium,
                     ),
@@ -285,7 +290,7 @@ class CheckoutPage extends StatelessWidget {
                       fontSize: 16, fontWeight: semiBold),
                 ),
                 Text(
-                  '\$ 110,00',
+                  '\$ ${cartProvider.totalPrice() + 10}',
                   style: priceTextStyle.copyWith(
                       fontSize: 16, fontWeight: semiBold),
                 ),
@@ -297,26 +302,35 @@ class CheckoutPage extends StatelessWidget {
     }
 
     Widget content() {
-      return Container(
-        margin: EdgeInsets.all(defaultMargin),
-        child: ListView(
-          children: [
-            Text(
-              'List Items',
-              style: primaryTextStyle.copyWith(
-                fontSize: 16,
-                fontWeight: medium,
-              ),
+      return ListView(
+        padding: EdgeInsets.all(defaultMargin),
+        children: [
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'List Items',
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: medium,
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: cartProvider.carts
+                      .map((cart) => CheckoutItem(cart))
+                      .toList(),
+                ),
+                addressDetails(),
+                productSummary(),
+              ],
             ),
-            SizedBox(
-              height: 12,
-            ),
-            CheckoutItem(),
-            CheckoutItem(),
-            addressDetails(),
-            productSummary(),
-          ],
-        ),
+          ),
+        ],
       );
     }
 

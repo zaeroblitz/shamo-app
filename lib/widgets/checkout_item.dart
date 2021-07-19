@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/CartModel.dart';
 import 'package:shamo/theme.dart';
 
 class CheckoutItem extends StatelessWidget {
+  final CartModel cart;
+
+  CheckoutItem(this.cart);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,8 +23,8 @@ class CheckoutItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/image_shoes.png',
+            child: Image.network(
+              cart.product.galleries[0].url,
               width: 60,
               height: 60,
               fit: BoxFit.cover,
@@ -35,7 +40,7 @@ class CheckoutItem extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.425,
                   child: Text(
-                    'Adidas SL 20 Shoes',
+                    '${cart.product.name}',
                     style: primaryTextStyle.copyWith(
                       fontWeight: semiBold,
                     ),
@@ -47,7 +52,7 @@ class CheckoutItem extends StatelessWidget {
                   height: 2,
                 ),
                 Text(
-                  '\$ 50,00',
+                  '\$ ${cart.product.price}',
                   style: priceTextStyle,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -55,7 +60,7 @@ class CheckoutItem extends StatelessWidget {
             ),
           ),
           Text(
-            '2 items',
+            '${cart.quantity} ' + (cart.quantity > 1 ? 'items' : 'item'),
             style: secondaryTextStyle.copyWith(
               fontSize: 12,
             ),
