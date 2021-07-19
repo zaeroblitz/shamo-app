@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/chat_buble.dart';
 
-class DetailChatPage extends StatelessWidget {
+class DetailChatPage extends StatefulWidget {
+  ProductModel product;
+  DetailChatPage(this.product);
+
+  @override
+  _DetailChatPageState createState() => _DetailChatPageState();
+}
+
+class _DetailChatPageState extends State<DetailChatPage> {
   Widget appBar() {
     return PreferredSize(
       child: AppBar(
@@ -71,8 +80,8 @@ class DetailChatPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/image_shoes.png',
+            child: Image.network(
+              widget.product.galleries[0].url,
               width: 54,
             ),
           ),
@@ -85,15 +94,16 @@ class DetailChatPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Adidas SL 20 Shoes',
+                  '${widget.product.name}',
                   style: primaryTextStyle,
                   overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 SizedBox(
                   height: 2,
                 ),
                 Text(
-                  '\$ 50,00',
+                  '\$ ${widget.product.price}',
                   style: priceTextStyle.copyWith(
                     fontWeight: medium,
                   ),
@@ -102,7 +112,11 @@ class DetailChatPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                widget.product = UninitializedProductModel();
+              });
+            },
             child: Image.asset(
               'assets/close_icon.png',
               width: 22,
@@ -146,7 +160,9 @@ class DetailChatPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          productPreview(),
+          widget.product is UninitializedProductModel
+              ? SizedBox()
+              : productPreview(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

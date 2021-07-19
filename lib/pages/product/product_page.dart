@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/ProductModel.dart';
+import 'package:shamo/pages/chat/detail_chat_page.dart';
 import 'package:shamo/provider/cart_provider.dart';
 import 'package:shamo/provider/product_provider.dart';
 import 'package:shamo/provider/wishlist_provider.dart';
@@ -375,7 +376,10 @@ class _ProductPageState extends State<ProductPage> {
           children: [
             OutlinedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/detailChat');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailChatPage(widget.product)));
               },
               style: OutlinedButton.styleFrom(
                 side: BorderSide(

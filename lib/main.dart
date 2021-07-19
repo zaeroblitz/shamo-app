@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:shamo/pages/cart/cart_page.dart';
 import 'package:shamo/pages/cart/checkout_page.dart';
 import 'package:shamo/pages/cart/checkout_success.dart';
-import 'package:shamo/pages/chat/detail_chat_page.dart';
 import 'package:shamo/pages/home/main_page.dart';
 import 'package:shamo/pages/profile/edit_profile.dart';
 import 'package:shamo/pages/sign_in_page.dart';
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
           '/signInPage': (context) => SignInPage(),
           '/signUpPage': (context) => SignUpPage(),
           '/home': (context) => MainPage(),
-          '/detailChat': (context) => DetailChatPage(),
           '/editProfile': (context) => EditProfilePage(),
           '/cart': (context) => CartPage(),
           '/checkout': (context) => CheckoutPage(),
