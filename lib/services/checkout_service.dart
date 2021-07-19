@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shamo/models/CartModel.dart';
 
-class TransactionService {
+class CheckoutService {
   String baseUrl = 'https://shamo-backend.buildwithangga.id/api';
 
-  Future checkout(
+  Future<bool> checkout(
       String token, List<CartModel> carts, double totalPrice) async {
     var url = '$baseUrl/checkout';
     var headers = {
@@ -13,7 +13,7 @@ class TransactionService {
       'Authorization': token,
     };
     var body = jsonEncode({
-      'address': 'Marsemoon',
+      'address': 'Beji, Depok',
       'items': carts
           .map((cart) => {
                 'id': cart.product.id,
@@ -28,6 +28,7 @@ class TransactionService {
     var response = await http.post(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
+      print(response.body);
       return true;
     } else {
       throw Exception('Checkout Failed');

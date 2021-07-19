@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:provider/provider.dart';
+import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/provider/cart_provider.dart';
+import 'package:shamo/provider/checkout_provider.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/checkout_item.dart';
+import 'package:shamo/widgets/loading_spinkit_button.dart';
 
-class CheckoutPage extends StatelessWidget {
+class CheckoutPage extends StatefulWidget {
+  @override
+  _CheckoutPageState createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
     CartProvider cartProvider = Provider.of<CartProvider>(context);
+    CheckoutProvider checkoutProvider = Provider.of<CheckoutProvider>(context);
+
+    handleCheckout() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await checkoutProvider.checkout(authProvider.user.token,
+          cartProvider.carts, cartProvider.totalPrice())) {
+        cartProvider.carts = [];
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/checkoutSuccess', (route) => false);
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
 
     Widget appBar() {
       return PreferredSize(
@@ -345,9 +374,7 @@ class CheckoutPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/checkoutSuccess');
-          },
+          onPressed: handleCheckout,
           style: TextButton.styleFrom(
             backgroundColor: primaryColor,
             padding: EdgeInsets.all(14),
@@ -370,7 +397,8 @@ class CheckoutPage extends StatelessWidget {
       backgroundColor: backgroundColor3,
       appBar: appBar(),
       body: content(),
-      bottomNavigationBar: checkoutNowButton(),
+      bottomNavigationBar:
+          isLoading ? LoadingButtonSpinkit() : checkoutNowButton(),
     );
   }
 }
