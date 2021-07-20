@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/theme.dart';
 
 class ChatBuble extends StatelessWidget {
   final String message;
   final bool isSender;
-  final bool hasProduct;
+  final ProductModel product;
 
   ChatBuble({
     this.message = '',
     this.isSender = false,
-    this.hasProduct = false,
+    this.product,
   });
 
   @override
@@ -34,8 +35,8 @@ class ChatBuble extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'assets/image_shoes.png',
+                  child: Image.network(
+                    product.galleries[0].url,
                     width: 70,
                   ),
                 ),
@@ -47,13 +48,13 @@ class ChatBuble extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Adidas Ultraboos SL 20 Shoes Limited Edition',
+                        '${product.name}',
                         style: primaryTextStyle,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
                       Text(
-                        '\$ 50,00',
+                        '\$ ${product.price}',
                         style: isSender
                             ? primaryTextStyle.copyWith(
                                 fontWeight: bold,
@@ -128,7 +129,7 @@ class ChatBuble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          hasProduct ? productPreview() : SizedBox(),
+          product is UninitializedProductModel ? SizedBox() : productPreview(),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,

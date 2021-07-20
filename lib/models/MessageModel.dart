@@ -27,7 +27,7 @@ class MessageModel {
     userName = json['userName'];
     userImage = json['userImage'];
     isFromUser = json['isFromUser'];
-    product = json['product'] == {}
+    product = json['product'].isEmpty
         ? UninitializedProductModel()
         : ProductModel.fromJson(json['product']);
     createdAt = DateTime.parse(json['createdAt']);
