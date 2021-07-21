@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/models/MessageModel.dart';
 import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/pages/chat/detail_chat_page.dart';
 import 'package:shamo/theme.dart';
 
 class ChatTile extends StatelessWidget {
+  final MessageModel message;
+  ChatTile(this.message);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,14 +43,16 @@ class ChatTile extends StatelessWidget {
                   'Shoe Store',
                   style: primaryTextStyle.copyWith(
                     fontSize: 16,
+                    fontWeight: semiBold,
                   ),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    'Good night, This item is on...',
-                    style: subtitleTextStyle.copyWith(
+                    '${message.message}',
+                    style: primaryTextStyle.copyWith(
                       fontWeight: light,
+                      color: backgroundColor6,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),

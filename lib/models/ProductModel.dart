@@ -42,7 +42,7 @@ class ProductModel {
     return {
       'id': id,
       'name': name,
-      'price': name,
+      'price': price,
       'decription': description,
       'tags': tags,
       'category': category.toJson(),

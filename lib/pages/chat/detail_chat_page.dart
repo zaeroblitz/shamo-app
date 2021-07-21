@@ -8,6 +8,7 @@ import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/chat_buble.dart';
 import 'package:shamo/widgets/loading_spinkit_button.dart';
 
+// ignore: must_be_immutable
 class DetailChatPage extends StatefulWidget {
   ProductModel product;
   DetailChatPage(this.product);

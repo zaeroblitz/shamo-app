@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/MessageModel.dart';
 import 'package:shamo/provider/auth_provider.dart';
+import 'package:shamo/provider/page_provider.dart';
 import 'package:shamo/services/message_service.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/chat_tile.dart';
@@ -10,6 +11,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    PageProvider pageProvider = Provider.of<PageProvider>(context);
 
     Widget header() {
       return Container(
@@ -70,7 +72,9 @@ class ChatPage extends StatelessWidget {
                   borderRadius: BorderRadiusDirectional.circular(24),
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    pageProvider.currentIndex = 0;
+                  },
                   style: TextButton.styleFrom(
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
@@ -113,7 +117,7 @@ class ChatPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    ChatTile(),
+                    ChatTile(snapshot.data[snapshot.data.length - 1]),
                   ],
                 ),
               );
