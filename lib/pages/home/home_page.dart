@@ -57,6 +57,57 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    Widget searchField() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 30,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                decoration: BoxDecoration(
+                  color: backgroundColor4,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: TextFormField(
+                    decoration: InputDecoration.collapsed(
+                      hintText: 'Search here...',
+                      hintStyle: subtitleTextStyle,
+                    ),
+                    style: primaryTextStyle,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 13,
+                horizontal: 12,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: primaryColor,
+              ),
+              child: Icon(
+                Icons.search_rounded,
+                color: primaryTextColor,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget categories() {
       return Container(
         margin: EdgeInsets.only(
@@ -228,6 +279,7 @@ class HomePage extends StatelessWidget {
     return ListView(
       children: [
         header(),
+        searchField(),
         categories(),
         popularProductsTitle(),
         popularProducts(),
