@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/UserModel.dart';
+import 'package:shamo/pages/search/search_page.dart';
 import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/provider/product_provider.dart';
 import 'package:shamo/theme.dart';
@@ -8,6 +9,8 @@ import 'package:shamo/widgets/new_arrival_card.dart';
 import 'package:shamo/widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {
+  TextEditingController searchQuery = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
@@ -77,6 +80,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: searchQuery,
                     decoration: InputDecoration.collapsed(
                       hintText: 'Search here...',
                       hintStyle: subtitleTextStyle,
@@ -89,18 +93,27 @@ class HomePage extends StatelessWidget {
             SizedBox(
               width: 12,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 13,
-                horizontal: 12,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: primaryColor,
-              ),
-              child: Icon(
-                Icons.search_rounded,
-                color: primaryTextColor,
+            GestureDetector(
+              onTap: () {
+                print(searchQuery.text);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchPage(searchQuery.text)));
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: 13,
+                  horizontal: 12,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: primaryColor,
+                ),
+                child: Icon(
+                  Icons.search_rounded,
+                  color: primaryTextColor,
+                ),
               ),
             ),
           ],
