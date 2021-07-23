@@ -133,7 +133,7 @@ class _ProductPageState extends State<ProductPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/home');
+                    Navigator.pop(context);
                   },
                   child: Icon(
                     Icons.chevron_left_rounded,
@@ -142,7 +142,9 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/cart');
+                  },
                   child: Image.asset(
                     'assets/cart_icon_black.png',
                     width: 20,

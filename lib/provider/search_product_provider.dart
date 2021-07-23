@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shamo/models/ProductModel.dart';
 import 'package:shamo/services/product_service.dart';
 
-class ProductProvider with ChangeNotifier {
+class SearchProductProvider with ChangeNotifier {
   List<ProductModel> _products = [];
 
   List<ProductModel> get products => _products;
@@ -12,10 +12,12 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getProducts() async {
+  Future<void> getProductsByName(String query) async {
     try {
-      List<ProductModel> products = await ProductService().getProducts();
+      List<ProductModel> products =
+          await ProductService().getProductsByName(query);
       _products = products;
+      return products;
     } catch (e) {
       print(e);
     }

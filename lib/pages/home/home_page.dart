@@ -4,12 +4,13 @@ import 'package:shamo/models/UserModel.dart';
 import 'package:shamo/pages/search/search_page.dart';
 import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/provider/product_provider.dart';
+import 'package:shamo/provider/search_product_provider.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/new_arrival_card.dart';
 import 'package:shamo/widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {
-  TextEditingController searchQuery = TextEditingController(text: '');
+  final TextEditingController searchQuery = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,6 @@ class HomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                print(searchQuery.text);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

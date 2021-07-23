@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/provider/product_provider.dart';
+import 'package:shamo/provider/search_product_provider.dart';
 import 'package:shamo/theme.dart';
+import 'package:shamo/widgets/loading_spinkit_button.dart';
 import 'package:shamo/widgets/new_arrival_card.dart';
 
 class SearchPage extends StatelessWidget {
-  // List<ProductModel> products = [];
-  // SearchPage(this.products);
-
   final String searchQuery;
   SearchPage(this.searchQuery);
 
-  @override
   Widget build(BuildContext context) {
-    ProductProvider productProvider = Provider.of<ProductProvider>(context);
-    productProvider.getProductsByName(searchQuery);
+    SearchProductProvider searchProductProvider =
+        Provider.of<SearchProductProvider>(context);
 
     Widget appBar() {
       return PreferredSize(
@@ -108,7 +105,7 @@ class SearchPage extends StatelessWidget {
         margin: EdgeInsets.only(top: 14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: productProvider.products
+          children: searchProductProvider.products
               .map((product) => NewArrialCard(
                     product: product,
                   ))
@@ -120,18 +117,37 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: appBar(),
-      body: Container(
-        margin: EdgeInsets.all(defaultMargin),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              header(),
-              products(),
-            ],
-          ),
-        ),
+      body: FutureBuilder(
+        future: searchProductProvider.getProductsByName(searchQuery),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadingButtonSpinkit();
+          } else {
+            return Container(
+              margin: EdgeInsets.all(defaultMargin),
+              child: (searchProductProvider.products.isNotEmpty)
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          header(),
+                          products(),
+                        ],
+                      ))
+                  : Center(
+                      child: Text(
+                        'Oopps!\nNo Products Found',
+                        textAlign: TextAlign.center,
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 20,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ),
+            );
+          }
+        },
       ),
     );
   }
