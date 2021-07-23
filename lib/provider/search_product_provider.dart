@@ -22,4 +22,15 @@ class SearchProductProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  Future<void> getProductsByCategory(int categoryId) async {
+    try {
+      List<ProductModel> products =
+          await ProductService().getProductsByCategory(categoryId);
+      _products = products;
+      return products;
+    } catch (e) {
+      print(e);
+    }
+  }
 }
