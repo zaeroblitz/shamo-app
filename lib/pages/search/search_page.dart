@@ -7,7 +7,13 @@ import 'package:shamo/widgets/new_arrival_card.dart';
 
 class SearchPage extends StatelessWidget {
   final String searchQuery;
-  SearchPage(this.searchQuery);
+  final bool isCategory;
+  final String categoryName;
+  SearchPage(
+    this.searchQuery, {
+    this.isCategory = false,
+    this.categoryName = '',
+  });
 
   Widget build(BuildContext context) {
     SearchProductProvider searchProductProvider =
@@ -58,7 +64,7 @@ class SearchPage extends StatelessWidget {
                       Text(
                         'Search Result',
                         style: primaryTextStyle.copyWith(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: medium,
                         ),
                       ),
@@ -89,7 +95,9 @@ class SearchPage extends StatelessWidget {
               ),
             ),
             Text(
-              searchQuery,
+              categoryName != ''
+                  ? categoryName + ' Category Shoes'
+                  : searchQuery,
               style: primaryTextStyle.copyWith(
                 fontSize: 18,
                 fontWeight: medium,
@@ -118,7 +126,10 @@ class SearchPage extends StatelessWidget {
       backgroundColor: backgroundColor3,
       appBar: appBar(),
       body: FutureBuilder(
-        future: searchProductProvider.getProductsByName(searchQuery),
+        future: isCategory
+            ? searchProductProvider
+                .getProductsByCategory(int.parse(searchQuery))
+            : searchProductProvider.getProductsByName(searchQuery),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return LoadingButtonSpinkit();

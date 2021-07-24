@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/models/CategoriModel.dart';
 import 'package:shamo/models/UserModel.dart';
 import 'package:shamo/pages/search/search_page.dart';
 import 'package:shamo/provider/auth_provider.dart';
 import 'package:shamo/provider/category_provider.dart';
 import 'package:shamo/provider/product_provider.dart';
-import 'package:shamo/provider/search_product_provider.dart';
 import 'package:shamo/theme.dart';
 import 'package:shamo/widgets/category_item.dart';
 import 'package:shamo/widgets/new_arrival_card.dart';

@@ -46,7 +46,7 @@ class ProductService {
   }
 
   Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-    var url = '$baseUrl/products?category=$categoryId';
+    var url = '$baseUrl/products?categories=$categoryId';
     var headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(url, headers: headers);
