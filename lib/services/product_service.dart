@@ -46,7 +46,14 @@ class ProductService {
   }
 
   Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-    var url = '$baseUrl/products?categories=$categoryId';
+    var url;
+
+    if (categoryId == 6) {
+      url = '$baseUrl/products?limit=0';
+    } else {
+      url = '$baseUrl/products?categories=$categoryId';
+    }
+
     var headers = {'Content-Type': 'application/json'};
 
     var response = await http.get(url, headers: headers);

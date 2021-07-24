@@ -5,11 +5,9 @@ import 'package:shamo/theme.dart';
 
 class CategoryItemCard extends StatelessWidget {
   final CategoryModel category;
-  final bool isActive;
 
   CategoryItemCard({
     this.category,
-    this.isActive = false,
   });
 
   @override
@@ -32,10 +30,7 @@ class CategoryItemCard extends StatelessWidget {
           horizontal: 12,
         ),
         decoration: BoxDecoration(
-          color: isActive ? primaryColor : transparentColor,
-          border: isActive
-              ? Border.all(color: primaryColor, width: 0)
-              : Border.all(color: subtitleTextColor, width: 0.5),
+          color: primaryColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(

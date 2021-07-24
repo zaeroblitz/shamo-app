@@ -130,15 +130,29 @@ class HomePage extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: categoryProvider.categories
-                .map((category) => CategoryItemCard(
-                      category: category,
-                      isActive: (category.name == 'All Shoes') ? true : false,
-                    ))
-                .toList()
-                .reversed
-                .toList(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Find by category',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 22,
+                  fontWeight: semiBold,
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Row(
+                children: categoryProvider.categories
+                    .map((category) => CategoryItemCard(
+                          category: category,
+                        ))
+                    .toList()
+                    .reversed
+                    .toList(),
+              ),
+            ],
           ),
         ),
       );
